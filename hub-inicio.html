@@ -11,7 +11,33 @@
   </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: #f5f5f5; min-height: 100vh; }
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('WALLPAPER_SM.png') center center / cover no-repeat;
+      opacity: 0.15;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #f5f5f5;
+      opacity: 0.6;
+      z-index: 0;
+    }
+    #pantalla-registro, #pantalla-menu {
+      position: relative;
+      z-index: 1;
+    }
     #pantalla-registro { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
     #pantalla-menu { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
     .logo { margin-bottom: 8px; }
@@ -26,7 +52,6 @@
   </style>
 </head>
 <body>
-
   <div id="pantalla-registro">
     <div class="logo"><img src="UPC_logo.png" height="70"></div>
     <div class="subtitle">Hub de Experiencia · San Miguel</div>
@@ -39,7 +64,6 @@
     <p class="instruccion">↑ Ingresa tu DNI y presiona Enviar, luego continúa</p>
     <button class="continuar-btn" onclick="mostrarMenu()">Ya ingresé mi DNI → Entrar al Hub</button>
   </div>
-
   <div id="pantalla-menu">
     <div class="logo"><img src="UPC_logo.png" height="70"></div>
     <div class="subtitle">Hub de Experiencia · San Miguel</div>
@@ -54,13 +78,11 @@
       </a>
     </div>
   </div>
-
   <script>
     function mostrarMenu() {
       document.getElementById('pantalla-registro').style.display = 'none';
       document.getElementById('pantalla-menu').style.display = 'flex';
     }
   </script>
-
 </body>
 </html>
