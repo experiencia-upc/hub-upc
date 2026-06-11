@@ -16,7 +16,9 @@
     #pantalla-menu { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
     .logo { margin-bottom: 8px; }
     .subtitle { color: #666; font-size: 16px; margin-bottom: 24px; }
-    .aviso { font-size: 13px; color: #999; margin-top: 12px; }
+    .instruccion { font-size: 13px; color: #888; margin-top: 16px; margin-bottom: 8px; text-align: center; }
+    .continuar-btn { margin-top: 4px; background: #c8102e; color: white; border: none; border-radius: 8px; padding: 14px 36px; font-size: 15px; font-weight: 500; cursor: pointer; width: 640px; max-width: 100%; }
+    .continuar-btn:hover { background: #a50d26; }
     .grid { display: grid; grid-template-columns: repeat(2, 200px); gap: 16px; }
     .btn { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 28px 20px; text-align: center; text-decoration: none; color: #333; font-size: 15px; font-weight: 500; transition: box-shadow 0.2s; }
     .btn:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
@@ -28,13 +30,14 @@
   <div id="pantalla-registro">
     <div class="logo"><img src="UPC_logo.png" height="70"></div>
     <div class="subtitle">Hub de Experiencia · San Miguel</div>
-    <iframe id="forms-iframe" width="640px" height="420px"
+    <iframe width="640px" height="420px"
       src="https://forms.office.com/Pages/ResponsePage.aspx?id=V0pUrsuu-UuCiltSBzKxEIzGFwvlMxhAlYAo4yQJYy1UNVBZSzBFOUUwQk1RMExZREoxOE1GSFc4My4u&embed=true"
       frameborder="0" marginwidth="0" marginheight="0"
       style="border: none; max-width:100%; border-radius: 12px;"
       allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen>
     </iframe>
-    <p class="aviso">Completa el formulario para acceder al Hub</p>
+    <p class="instruccion">↑ Ingresa tu DNI y presiona Enviar, luego continúa</p>
+    <button class="continuar-btn" onclick="mostrarMenu()">Ya ingresé mi DNI → Entrar al Hub</button>
   </div>
 
   <div id="pantalla-menu">
@@ -61,32 +64,6 @@
   </div>
 
   <script>
-    window.addEventListener("message", function(event) {
-      if (event.data && event.data.type === "formSubmitted") {
-        mostrarMenu();
-      }
-    });
-
-    setTimeout(function() {
-      var iframe = document.getElementById("forms-iframe");
-      var iframeDoc = null;
-      try {
-        iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        if (iframeDoc && iframeDoc.body && iframeDoc.body.innerHTML.includes("response")) {
-          mostrarMenu();
-        }
-      } catch(e) {}
-    }, 3000);
-
-    setInterval(function() {
-      var iframe = document.getElementById("forms-iframe");
-      try {
-        if (iframe.contentWindow.location.href.includes("thankyou")) {
-          mostrarMenu();
-        }
-      } catch(e) {}
-    }, 1000);
-
     function mostrarMenu() {
       document.getElementById('pantalla-registro').style.display = 'none';
       document.getElementById('pantalla-menu').style.display = 'flex';
